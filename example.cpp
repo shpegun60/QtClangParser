@@ -37,6 +37,7 @@ public:
     void publicFunction(int arg1, float arg2) {}
 private:
     float privateFunction() { return 0.0f; }
+	const ExampleClass* aaa;
 protected:
     void protectedFunction() {}
 };

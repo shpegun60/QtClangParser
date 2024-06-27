@@ -1,12 +1,10 @@
 QT       += core gui
 QT += qml quick
+QT += quickcontrols2
+QT += qml quickwidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
-
-# INCLUDEPATH += C:/CustomInstall/libclang/include
-# LIBS += -LC:/CustomInstall/libclang/lib -lclang
-
 
 INCLUDEPATH += "C:/Program Files/LLVM/include"
 LIBS += -L"C:/Program Files/LLVM/lib" -lclang
@@ -20,12 +18,14 @@ LIBS += -L"C:/Program Files/LLVM/lib" -lclang
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    MyTreeModel.cpp \
     clangparser.cpp \
     classinfoprovider.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    MyTreeModel.hpp \
     clangparser.h \
     classinfoprovider.h \
     mainwindow.h

@@ -36,12 +36,15 @@ public:
     struct Class {
         QString name;
         bool isStruct;
+        AccessSpecifier accessSpecifier = None;
+
         QVector<Variable> variables;
         QVector<Function> functions;
+        QVector<Class*> classes;
     };
 
     const QMap<QString, Class>& getClasses() const;
-    QString accessSpecifierToString(ClangParser::AccessSpecifier accessSpecifier);
+    static QString accessSpecifierToString(ClangParser::AccessSpecifier accessSpecifier);
 
 private:
 

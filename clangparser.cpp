@@ -44,6 +44,7 @@ void ClangParser::parseFile(const QString &filePath)
 void ClangParser::parseAST(CXTranslationUnit translationUnit)
 {
     CXCursor cursor = clang_getTranslationUnitCursor(translationUnit);
+
     clang_visitChildren(cursor, [](CXCursor c, CXCursor parent, CXClientData clientData) {
             ClangParser* const parser = static_cast<ClangParser*>(clientData);
             const enum CXCursorKind cursorType = clang_getCursorKind(c);
@@ -78,16 +79,14 @@ void ClangParser::parseAST(CXTranslationUnit translationUnit)
                                 break;
                             }
                         }
-
-                        if (clang_getCursorKind(member) == CXCursor_FieldDecl) {
+                        else if (clang_getCursorKind(member) == CXCursor_FieldDecl) {
                             ClangParser::Variable var;
                             var.name = QString::fromStdString(clang_getCString(clang_getCursorSpelling(member)));
                             var.type = QString::fromStdString(clang_getCString(clang_getTypeSpelling(clang_getCursorType(member))));
                             var.accessSpecifier = classLocaldata->specifier_flag;
                             classLocaldata->cls.variables.append(var);
                         }
-
-                        if (clang_getCursorKind(member) == CXCursor_CXXMethod) {
+                        else if (clang_getCursorKind(member) == CXCursor_CXXMethod) {
                             ClangParser::Function func;
                             func.name = QString::fromStdString(clang_getCString(clang_getCursorSpelling(member)));
                             func.returnType = QString::fromStdString(clang_getCString(clang_getTypeSpelling(clang_getCursorResultType(member))));
